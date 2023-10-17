@@ -4,8 +4,10 @@ import android.app.Application
 import android.content.Context
 import com.bosta.ahmedkhaled.data.remote.ApiInterface
 import com.bosta.ahmedkhaled.data.repository.AlbumsApiRepoImpl
+import com.bosta.ahmedkhaled.data.repository.PhotosApiRepoImpl
 import com.bosta.ahmedkhaled.data.repository.UsersApiRepoImpl
 import com.bosta.ahmedkhaled.domain.repository.AlbumsApIRepo
+import com.bosta.ahmedkhaled.domain.repository.PhotosApIRepo
 import com.bosta.ahmedkhaled.domain.repository.UsersApIRepo
 import com.bosta.ahmedkhaled.utils.Constants.BASE_URL
 import dagger.Binds
@@ -52,4 +54,12 @@ abstract class AlbumsPort {
     @Binds
     @Singleton
     abstract fun bindApiRepo(impl: AlbumsApiRepoImpl): AlbumsApIRepo
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class PhotosPort {
+    @Binds
+    @Singleton
+    abstract fun bindApiRepo(impl: PhotosApiRepoImpl): PhotosApIRepo
 }
