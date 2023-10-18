@@ -17,5 +17,9 @@
         android:id="@+id/secondFragment"
         android:name="com.bosta.ahmedkhaled.presentation.ui.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_second" >
+        <argument
+            android:name="album"
+            app:argType="com.bosta.ahmedkhaled.data.model.response.GetAlbumsResponse" />
+    </fragment>
 </navigation>
