@@ -15,7 +15,6 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:textAlignment="center"
             android:textSize="@dimen/_15ssp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +22,18 @@
             app:layout_constraintVertical_bias="0.0"
             tools:text="Album title" />
 
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"
+            android:background="@drawable/background_for_search"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="@+id/titleAlbumTv"
+            app:layout_constraintStart_toStartOf="@+id/titleAlbumTv"
+            app:layout_constraintTop_toBottomOf="@+id/titleAlbumTv" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photosRecycler"
@@ -33,10 +44,11 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/titleAlbumTv"
-            app:layout_constraintStart_toStartOf="@+id/titleAlbumTv"
-            app:layout_constraintTop_toBottomOf="@+id/titleAlbumTv"
+            app:layout_constraintEnd_toEndOf="@+id/searchView"
+            app:layout_constraintStart_toStartOf="@+id/searchView"
+            app:layout_constraintTop_toBottomOf="@+id/searchView"
             tools:listitem="@layout/photo_item" />
+
 
 
         <include

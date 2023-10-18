@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bosta.ahmedkhaled.R
+import com.bosta.ahmedkhaled.data.model.response.GetPhotosResponse
 import com.bosta.ahmedkhaled.databinding.FragmentSecondBinding
-import com.bosta.ahmedkhaled.presentation.adapters.AlbumsAdapter
 import com.bosta.ahmedkhaled.presentation.adapters.PhotosAdapter
 import com.bosta.ahmedkhaled.presentation.navigators.PhotosNavigator
 import com.bosta.ahmedkhaled.presentation.viewmodels.PhotosViewModel
@@ -23,12 +25,10 @@ class SecondFragment : Fragment(), PhotosNavigator {
     private val viewModelPhotos: PhotosViewModel by viewModels()
     private val args: SecondFragmentArgs by navArgs()
     private lateinit var photosAdapter: PhotosAdapter
+    private var originalData: MutableList<GetPhotosResponse> = ArrayList()
+    private var filteredData: MutableList<GetPhotosResponse> = ArrayList()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSecondBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -40,10 +40,32 @@ class SecondFragment : Fragment(), PhotosNavigator {
         viewModelPhotos.usersData(args.album.id)
         initResponseApiForPhotos()
         setUpRecyclerPhotosData()
+        setUpSearchViewForPhotos()
+    }
+
+    private fun setUpSearchViewForPhotos() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterData(newText ?: "")
+                return true
+            }
+        })
+
+    }
+
+    private fun filterData(query: String) {
+        filteredData = originalData
+        filteredData = originalData.filter { item -> item.title.contains(query, ignoreCase = true) }
+                as MutableList<GetPhotosResponse>
+        photosAdapter.differ.submitList(filteredData)
     }
 
     private fun setTitleAlbum() {
-        binding.titleAlbumTv.text = args.album.title
+        binding.titleAlbumTv.text = getString(R.string.album_name, args.album.title)
     }
 
     private fun initResponseApiForPhotos() {
@@ -54,7 +76,9 @@ class SecondFragment : Fragment(), PhotosNavigator {
                 }
 
                 is Resource.Success -> {
-                    photosAdapter.differ.submitList(it.data!!)
+                    originalData = it.data!!
+                    photosAdapter.differ.submitList(originalData)
+                    binding.searchView.queryHint = it.data[0].title
                     hideProgress()
                 }
 
@@ -82,7 +106,7 @@ class SecondFragment : Fragment(), PhotosNavigator {
     }
 
 
-    override fun clickOnPhoto() {
+    override fun clickOnPhoto(url: String) {
 
     }
 
