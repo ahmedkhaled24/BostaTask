@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.bosta.ahmedkhaled.R
 import com.bosta.ahmedkhaled.data.model.response.GetUsersResponse
 import com.bosta.ahmedkhaled.databinding.FragmentFirstBinding
 import com.bosta.ahmedkhaled.presentation.viewmodels.AlbumsViewModel
@@ -59,11 +60,10 @@ class FirstFragment : Fragment() {
     private fun setRandomUser(data: MutableList<GetUsersResponse>?) {
         data!!.shuffle()
         val randomUser = data.random()
-
+        binding.nameUserTv.text = getString(R.string.name, randomUser.name)
+        binding.addressUserTv.text = getString(R.string.address,
+            randomUser.address.street + " - " + randomUser.address.city)
         viewModelAlbums.albumsData(randomUser.id)
-
-        Log.d(TAG, "initResponseApiForUsers: ${randomUser.name}")
-        showToast(randomUser.id.toString())
     }
 
 
