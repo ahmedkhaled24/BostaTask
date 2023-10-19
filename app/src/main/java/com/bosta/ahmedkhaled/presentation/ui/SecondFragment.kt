@@ -29,6 +29,11 @@ class SecondFragment : Fragment(), PhotosNavigator {
     private var originalData: MutableList<GetPhotosResponse> = ArrayList()
     private var filteredData: MutableList<GetPhotosResponse> = ArrayList()
 
+
+    override fun onResume() {
+        super.onResume()
+        binding.searchView.setQuery("", false)
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSecondBinding.inflate(layoutInflater, container, false)
         return binding.root
