@@ -50,8 +50,6 @@ class AlbumsAdapter(private val listener: AlbumsNavigator) :
 
     override fun onBindViewHolder(holder: AlbumsViewHolder, position: Int) {
         val item = differ.currentList[position]
-//        holder.bind(item)
-
         holder.title.text = item.title
 
         holder.title.setOnClickListener {
