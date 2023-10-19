@@ -5,4 +5,6 @@
     <string name="current_user">Current User\n(random selection)</string>
     <string name="user_albums">User albums</string>
     <string name="album_name">Album name: %s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

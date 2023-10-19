@@ -21,5 +21,16 @@
         <argument
             android:name="album"
             app:argType="com.bosta.ahmedkhaled.data.model.response.GetAlbumsResponse" />
+        <action
+            android:id="@+id/action_secondFragment_to_displayImageFragment"
+            app:destination="@id/displayImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayImageFragment"
+        android:name="com.bosta.ahmedkhaled.presentation.ui.DisplayImageFragment"
+        android:label="DisplayImageFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 </navigation>

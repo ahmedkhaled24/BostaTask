@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bosta.ahmedkhaled.R
 import com.bosta.ahmedkhaled.data.model.response.GetPhotosResponse
@@ -107,7 +108,7 @@ class SecondFragment : Fragment(), PhotosNavigator {
 
 
     override fun clickOnPhoto(url: String) {
-
+        findNavController().navigate(SecondFragmentDirections.actionSecondFragmentToDisplayImageFragment(url))
     }
 
 }
